@@ -1,28 +1,28 @@
-﻿  aBehaviorController.cpp
-  aBehaviors.cpp
-  Generating Code...
-  libassignment5.vcxproj -> D:\MyHomeWork\HW9_BehavioralAnimation\HW9 - AnimationToolkit - 2017\libsrc\animation\..\..\lib\libassignment5d.lib
-  aActor.h
-  aBehaviorController.h
-  aBehaviors.h
-  aBVHController.h
-  aFireworks.h
-  aIKController.h
-  aJitter.h
-  aJoint.h
-  aMatrix.h
-  aMotion.h
-  aMotionController.h
-  aParticle.h
-  aParticleSystem.h
-  aRocket.h
-  aRotation.h
-  aSkeleton.h
-  aSpark.h
-  aSplineQuat.h
-  aSplineQuaternion.h
-  aSplineVec3.h
-  aTarget.h
-  aTransform.h
-  aVector.h
-  已复制        23 个文件。
+﻿  aBehaviors.cpp
+aBehaviors.cpp(280): error C2679: binary '=': no operator found which takes a right-hand operand of type 'std::vector<Obstacle,std::allocator<_Ty>>' (or there is no acceptable conversion)
+          with
+          [
+              _Ty=Obstacle
+          ]
+  c:\users\sagar tetali\homework\computeranimation\hw9-behavioral-animation-sagartv\hw9 - animationtoolkit - 2017\libsrc\animation\aBehaviors.h(106): note: could be 'Obstacle &Obstacle::operator =(const Obstacle &)'
+  aBehaviors.cpp(280): note: while trying to match the argument list '(Obstacle, std::vector<Obstacle,std::allocator<_Ty>>)'
+          with
+          [
+              _Ty=Obstacle
+          ]
+aBehaviors.cpp(281): error C2228: left of '.end' must have class/struct/union
+  aBehaviors.cpp(281): note: type is 'std::vector<Obstacle,std::allocator<_Ty>> *'
+          with
+          [
+              _Ty=Obstacle
+          ]
+  aBehaviors.cpp(281): note: did you intend to use '->' instead?
+aBehaviors.cpp(480): warning C4018: '<': signed/unsigned mismatch
+aBehaviors.cpp(490): error C3867: 'BehaviorController::getVelocity': non-standard syntax; use '&' to create a pointer to member
+aBehaviors.cpp(490): error C2679: binary '+': no operator found which takes a right-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+  c:\users\sagar tetali\homework\computeranimation\hw9-behavioral-animation-sagartv\hw9 - animationtoolkit - 2017\libsrc\animation\aRotation.h(159): note: could be 'quat operator +(const quat &,const quat &)'
+  c:\users\sagar tetali\homework\computeranimation\hw9-behavioral-animation-sagartv\hw9 - animationtoolkit - 2017\libsrc\animation\aRotation.h(73): note: or       'mat3 operator +(const mat3 &,const mat3 &)'
+  c:\users\sagar tetali\homework\computeranimation\hw9-behavioral-animation-sagartv\hw9 - animationtoolkit - 2017\libsrc\animation\aVector.h(40): note: or       'vec3 operator +(const vec3 &,const vec3 &)'
+  aBehaviors.cpp(490): note: while trying to match the argument list '(vec3, overloaded-function)'
+aBehaviors.cpp(544): warning C4018: '<': signed/unsigned mismatch
+aBehaviors.cpp(610): warning C4018: '<': signed/unsigned mismatch

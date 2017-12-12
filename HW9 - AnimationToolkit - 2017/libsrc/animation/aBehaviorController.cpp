@@ -162,6 +162,17 @@ void BehaviorController::control(double deltaT)
 
 		// TODO: insert your code here to compute m_force and m_torque
 
+		float Kv = 10;;
+		float Kp = 200;
+		float theta = m_state[1][1];
+
+		m_force = gMass*Kv*(m_Vdesired - m_VelB[2]);
+		float thetad = Dot(m_Vdesired, vec3(1, 0, 0));
+		thetad = acos(thetad);
+		float an = thetad - theta;
+		m_torque = gInertia*(-1.0*Kv*m_stateDot[1][1] - Kp*(an));
+		
+
 
 
 
@@ -208,9 +219,19 @@ void BehaviorController::computeDynamics(vector<vec3>& state, vector<vec3>& cont
 {
 	vec3& force = controlInput[0];
 	vec3& torque = controlInput[1];
+	m_stateDot[0] = mat3::Rotation3D(vec3(0,1.0,0),m_state[1][1])*m_state[2];
+	m_stateDot[1] = m_state[3];
+	m_stateDot[2] = force / gMass;
+	float thetaDot2 = m_torque[1] / gInertia;
+	m_stateDot[3] = vec3(0.f, thetaDot2, 0.f);
+
+
+
 
 	// Compute the stateDot vector given the values of the current state vector and control input vector
 	// TODO: add your code here
+	
+
 
 
 
@@ -224,6 +245,12 @@ void BehaviorController::updateState(float deltaT, int integratorType)
 	//  this should be similar to what you implemented in the particle system assignment
 
 	// TODO: add your code here
+	m_state[0] = m_state[0] + deltaT*m_stateDot[0];
+	m_state[1] = m_state[1] + deltaT*m_stateDot[1];
+	m_state[2] = m_state[2] + deltaT*m_stateDot[2];
+	m_state[3] = m_state[3] + deltaT*m_stateDot[3];
+	
+
 	
 
 
@@ -241,13 +268,21 @@ void BehaviorController::updateState(float deltaT, int integratorType)
 	//  Perform validation check to make sure all values are within MAX values
 	// TODO: add your code here
 
+	if (m_VelB.Length() > gMaxSpeed)
+	{
+		m_VelB.Normalize();
+		m_VelB = m_VelB * gMaxSpeed;
+		m_state[2] = m_VelB;
 
+	}
 
+	if (m_AVelB.Length() > gMaxAngularSpeed)
+	{
+		m_AVelB.Normalize();
+		m_AVelB = m_VelB * gMaxSpeed;
+		m_state[3] = m_VelB;
 
-
-
-
-
+	}
 	// update the guide orientation
 	// compute direction from nonzero velocity vector
 	vec3 dir;
